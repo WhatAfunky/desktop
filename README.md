@@ -41,6 +41,16 @@ npm run fetch
 
 Repeat the three previous sets of commands every time you pull changes from GitHub.
 
+### Editor forks
+
+This fork builds the editor from local clones of scratch-gui and scratch-vm placed next to this repository (`../scratch-gui` and `../scratch-vm`, on their `engine` branches). Override the locations with the `SCRATCH_GUI` and `SCRATCH_VM` environment variables. Their dependencies still come from this repository's `node_modules`, so after `npm ci` run:
+
+```bash
+npm run setup:forks
+```
+
+When moving the forks to a newer upstream commit, update the `scratch-gui` commit in package-lock.json to match so the installed dependencies agree with the fork. `webpack:watch` picks up edits inside the forks. See ROADMAP.md for the plan.
+
 Due to the security requirements mandated by custom extensions existing, our desktop app is significantly more complicated than Scratch's.
 
  - **src-main** is what runs in Electron's main process. There is no build step; this code is included as-is. `src-main/entrypoint.js` is the entry point to the entire app.
